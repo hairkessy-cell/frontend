@@ -1,60 +1,52 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { ProductService } from '../../services/product.service';
-import { ProductResponse } from '../../models/product.model';
+import { ProductListingComponent } from '../product-listing/product-listing.component';
 import { LanguageService } from '../../services/language.service';
+import { SEOService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-wigs',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
-  templateUrl: './wigs.component.html',
-  styleUrl: './wigs.component.scss'
+  imports: [ProductListingComponent],
+  template: `
+    <app-product-listing
+      titleKey="wigs.title"
+      subtitleKey="wigs.subtitle"
+      searchPlaceholderKey="wigs.searchPlaceholder"
+      noResultsKey="wigs.noResults"
+      categoryName="Wigs"
+    />
+  `
 })
 export class WigsComponent implements OnInit {
-  protected products: ProductResponse[] = [];
-  protected allProducts: ProductResponse[] = [];
-  protected loading = true;
-  protected searchQuery = '';
-
   constructor(
-    private productService: ProductService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private seoService: SEOService
   ) {}
 
   ngOnInit(): void {
-    this.productService.getProductsByCategory('Wigs', 0, 20).subscribe(response => {
-      this.allProducts = response.content;
-      this.filterProducts();
-      this.loading = false;
+    this.setupSEO();
+  }
+
+  private setupSEO(): void {
+    const brandName = this.languageService.getTranslation('common.brandName');
+    const title = this.languageService.getTranslation('wigs.title');
+    const subtitle = this.languageService.getTranslation('wigs.subtitle');
+    const url = '/wigs';
+
+    this.seoService.setHreflangTags([
+      { lang: 'en', url },
+      { lang: 'tr', url: `${url}?lang=turkish` },
+      { lang: 'ru', url: `${url}?lang=russian` }
+    ]);
+
+    this.seoService.setSEOData({
+      title: `${title} - ${brandName}`,
+      description: subtitle || `Shop premium quality wigs at ${brandName}. Discover our wide selection of professional wigs for all styles and occasions.`,
+      keywords: 'wigs, hair wigs, professional wigs, synthetic wigs, human hair wigs, wig products',
+      url,
+      type: 'website',
+      image: '/assets/images/logo.svg'
     });
-  }
-
-  onSearchChange(): void {
-    this.filterProducts();
-  }
-
-  private filterProducts(): void {
-    if (!this.searchQuery.trim()) {
-      this.products = this.allProducts;
-      return;
-    }
-
-    const query = this.searchQuery.toLowerCase().trim();
-    this.products = this.allProducts.filter(product => {
-      const titleMatch = product.title?.toLowerCase().includes(query);
-      const descriptionMatch = product.description?.toLowerCase().includes(query);
-      const brandMatch = product.brand?.toLowerCase().includes(query);
-      const colorMatch = product.color?.toLowerCase().includes(query);
-      
-      return titleMatch || descriptionMatch || brandMatch || colorMatch;
-    });
-  }
-
-  getTranslation(key: string): string {
-    return this.languageService.getTranslation(key);
   }
 }
 

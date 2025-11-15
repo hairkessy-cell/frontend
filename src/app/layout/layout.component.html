@@ -1,38 +1,9 @@
-@if (showBanner()) {
-<div class="top-banner">
-  <span class="banner-text">{{ getTranslation("banner.message") }}</span>
-  <button
-    class="banner-close"
-    (click)="closeBanner()"
-    aria-label="{{ getTranslation('banner.close') }}"
-  >
-    <i class="fas fa-times"></i>
-  </button>
-</div>
-}
-
 <header class="main-header">
   <div class="header-container">
-    <a routerLink="/" class="logo">{{ getTranslation("common.brandName") }}</a>
-    <nav class="main-nav">
-      <a
-        routerLink="/"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="nav-link"
-      >
-        {{ getTranslation("nav.home") }}
-      </a>
-      <a routerLink="/about-us" routerLinkActive="active" class="nav-link">
-        {{ getTranslation("nav.aboutUs") }}
-      </a>
-      <a routerLink="/hair-colors" routerLinkActive="active" class="nav-link">
-        {{ getTranslation("nav.hairColors") }}
-      </a>
-      <a routerLink="/wigs" routerLinkActive="active" class="nav-link">
-        {{ getTranslation("nav.wigs") }}
-      </a>
-    </nav>
+    <a routerLink="/" class="logo">
+      <img src="/assets/images/logo.svg" alt="HAIRKESSY" />
+    </a>
+
     <div class="header-actions">
       <div class="language-selector">
         <button
@@ -74,6 +45,148 @@
   </div>
 </header>
 
+<nav class="category-nav">
+  <div class="category-nav-wrapper">
+    @if (showLeftChevron()) {
+    <button
+      class="nav-chevron nav-chevron-left"
+      (click)="scrollCategoryNav('left')"
+      aria-label="Scroll left"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    }
+    <div
+      class="category-nav-container"
+      #categoryNavContainer
+      (scroll)="onCategoryNavScroll()"
+    >
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="category-link"
+      >
+        {{ getTranslation("nav.home") }}
+      </a>
+      <a routerLink="/about-us" routerLinkActive="active" class="category-link">
+        {{ getTranslation("nav.aboutUs") }}
+      </a>
+      <a routerLink="/wigs" routerLinkActive="active" class="category-link">
+        {{ getTranslation("nav.wigs") }}
+      </a>
+      <a
+        routerLink="/braid-hair"
+        routerLinkActive="active"
+        class="category-link"
+      >
+        {{ getTranslation("nav.braidHair") }}
+      </a>
+      <a
+        routerLink="/african-afro-hair"
+        routerLinkActive="active"
+        class="category-link"
+      >
+        {{ getTranslation("nav.africanAfroHair") }}
+      </a>
+      <a
+        routerLink="/russian-afro-hair"
+        routerLinkActive="active"
+        class="category-link"
+      >
+        {{ getTranslation("nav.russianAfroHair") }}
+      </a>
+      <a
+        routerLink="/training-mannequins"
+        routerLinkActive="active"
+        class="category-link"
+      >
+        {{ getTranslation("nav.trainingMannequins") }}
+      </a>
+      <a
+        routerLink="/hair-accessories"
+        routerLinkActive="active"
+        class="category-link"
+      >
+        {{ getTranslation("nav.hairAccessories") }}
+      </a>
+      <a
+        routerLink="/hair-extension-materials"
+        routerLinkActive="active"
+        class="category-link"
+      >
+        {{ getTranslation("nav.hairExtensionMaterials") }}
+      </a>
+      <a
+        routerLink="/wig-materials"
+        routerLinkActive="active"
+        class="category-link"
+      >
+        {{ getTranslation("nav.wigMaterials") }}
+      </a>
+      <a
+        routerLink="/bead-extensions"
+        routerLinkActive="active"
+        class="category-link"
+      >
+        {{ getTranslation("nav.beadExtensions") }}
+      </a>
+      <a
+        routerLink="/micro-extensions"
+        routerLinkActive="active"
+        class="category-link"
+      >
+        {{ getTranslation("nav.microExtensions") }}
+      </a>
+      <a
+        routerLink="/hairpieces"
+        routerLinkActive="active"
+        class="category-link"
+      >
+        {{ getTranslation("nav.hairpieces") }}
+      </a>
+      <a
+        routerLink="/synthetic-tresses"
+        routerLinkActive="active"
+        class="category-link"
+      >
+        {{ getTranslation("nav.syntheticTresses") }}
+      </a>
+    </div>
+    @if (showRightChevron()) {
+    <button
+      class="nav-chevron nav-chevron-right"
+      (click)="scrollCategoryNav('right')"
+      aria-label="Scroll right"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+    }
+  </div>
+</nav>
+
 <main class="main-content">
   <router-outlet />
 </main>
@@ -94,17 +207,78 @@
           <a routerLink="/wigs">{{ getTranslation("nav.wigs") }}</a>
         </li>
         <li>
-          <a routerLink="/hair-colors">{{
-            getTranslation("nav.hairColors")
+          <a routerLink="/synthetic-hair">{{
+            getTranslation("nav.syntheticHair")
+          }}</a>
+        </li>
+        <li>
+          <a routerLink="/braid-hair">{{ getTranslation("nav.braidHair") }}</a>
+        </li>
+        <li>
+          <a routerLink="/synthetic-training-hair">{{
+            getTranslation("nav.syntheticTrainingHair")
+          }}</a>
+        </li>
+        <li>
+          <a routerLink="/real-training-hair">{{
+            getTranslation("nav.realTrainingHair")
+          }}</a>
+        </li>
+        <li>
+          <a routerLink="/real-human-hair">{{
+            getTranslation("nav.realHumanHair")
+          }}</a>
+        </li>
+        <li>
+          <a routerLink="/african-afro-hair">{{
+            getTranslation("nav.africanAfroHair")
+          }}</a>
+        </li>
+        <li>
+          <a routerLink="/russian-afro-hair">{{
+            getTranslation("nav.russianAfroHair")
+          }}</a>
+        </li>
+        <li>
+          <a routerLink="/training-mannequins">{{
+            getTranslation("nav.trainingMannequins")
+          }}</a>
+        </li>
+        <li>
+          <a routerLink="/hair-accessories">{{
+            getTranslation("nav.hairAccessories")
+          }}</a>
+        </li>
+        <li>
+          <a routerLink="/hair-extension-materials">{{
+            getTranslation("nav.hairExtensionMaterials")
+          }}</a>
+        </li>
+        <li>
+          <a routerLink="/wig-materials">{{
+            getTranslation("nav.wigMaterials")
+          }}</a>
+        </li>
+        <li>
+          <a routerLink="/bead-extensions">{{
+            getTranslation("nav.beadExtensions")
+          }}</a>
+        </li>
+        <li>
+          <a routerLink="/micro-extensions">{{
+            getTranslation("nav.microExtensions")
+          }}</a>
+        </li>
+        <li>
+          <a routerLink="/hairpieces">{{ getTranslation("nav.hairpieces") }}</a>
+        </li>
+        <li>
+          <a routerLink="/synthetic-tresses">{{
+            getTranslation("nav.syntheticTresses")
           }}</a>
         </li>
         <li>
           <a routerLink="/about-us">{{ getTranslation("nav.aboutUs") }}</a>
-        </li>
-        <li>
-          <a routerLink="/services-pricing">{{
-            getTranslation("nav.servicesPricing")
-          }}</a>
         </li>
       </ul>
     </div>
