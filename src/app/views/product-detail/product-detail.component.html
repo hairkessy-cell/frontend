@@ -1,0 +1,118 @@
+@if (loading) {
+<div class="loading">{{ getTranslation("common.loading") }}</div>
+} @else if (product()) {
+<div class="product-detail-page">
+  <div class="product-container">
+    <div class="product-images">
+      <div class="main-image">
+        @if (product()!.images && product()!.images.length > 0) {
+        <img
+          [src]="product()!.images[selectedImageIndex()].url"
+          [alt]="product()!.title"
+        />
+        } @else {
+        <div class="placeholder-image"></div>
+        }
+      </div>
+      @if (product()!.images && product()!.images.length > 1) {
+      <div class="thumbnail-images">
+        @for (image of product()!.images; track $index) {
+        <div
+          class="thumbnail"
+          [class.active]="selectedImageIndex() === $index"
+          (click)="selectImage($index)"
+        >
+          <img [src]="image.url" [alt]="product()!.title" />
+        </div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="product-info">
+      <h1 class="product-title">{{ product()!.title }}</h1>
+
+      @if (product()!.brand) {
+      <p class="product-brand">{{ getTranslation("product.brand") }} {{ product()!.brand }}</p>
+      }
+
+      <div class="product-price-section">
+        @if (product()!.onsale && product()!.salePrice < product()!.listPrice) {
+        <div class="price">
+          <span class="sale-price"
+            >{{ product()!.salePrice | number : "1.2-2" }} ₺</span
+          >
+          <span class="original-price"
+            >{{ product()!.listPrice | number : "1.2-2" }} ₺</span
+          >
+          <span class="discount-badge">
+            {{
+              ((1 - product()!.salePrice / product()!.listPrice) * 100).toFixed(
+                0
+              )
+            }}% {{ getTranslation("product.off") }}
+          </span>
+        </div>
+        } @else {
+        <div class="price">
+          <span class="regular-price"
+            >{{ product()!.listPrice | number : "1.2-2" }} ₺</span
+          >
+        </div>
+        }
+      </div>
+
+      @if (product()!.description) {
+      <div class="product-description">
+        <h3>{{ getTranslation("product.description") }}</h3>
+        <p>{{ product()!.description }}</p>
+      </div>
+      } @if (product()!.attributes && product()!.attributes.length > 0) {
+      <div class="product-attributes">
+        <h3>{{ getTranslation("product.details") }}</h3>
+        <div class="attributes-list">
+          @for (attr of product()!.attributes; track attr.attributeId) {
+          <div class="attribute-item">
+            <span class="attribute-name">{{ attr.attributeName }}:</span>
+            <span class="attribute-value">{{ attr.attributeValue }}</span>
+          </div>
+          }
+        </div>
+      </div>
+      } @if (product()!.deliveryOption) {
+      <div class="delivery-info">
+        <p>{{ getTranslation("product.delivery") }} {{ product()!.deliveryOption?.deliveryDuration }} days</p>
+        @if (product()!.deliveryOption?.fastDeliveryType) {
+        <p class="fast-delivery">
+          {{ product()!.deliveryOption?.fastDeliveryType }}
+        </p>
+        }
+      </div>
+      } @if (product()!.productUrl) {
+      <div class="product-actions">
+        <a
+          [href]="product()!.productUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="view-product-btn"
+        >
+          <i class="fas fa-external-link-alt"></i>
+          {{ getTranslation("product.reference.viewLink") }}
+        </a>
+      </div>
+      } @else {
+      <div class="product-actions">
+        <div class="no-link-message">
+          <p>{{ getTranslation("product.reference.noLink") }}</p>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+} @else {
+<div class="not-found">
+  <h2>{{ getTranslation("product.notFound") }}</h2>
+  <button (click)="router.navigate(['/'])">{{ getTranslation("product.goToHome") }}</button>
+</div>
+}

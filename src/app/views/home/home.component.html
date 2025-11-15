@@ -1,0 +1,60 @@
+<section class="hero-section">
+  <div class="hero-content">
+    <p class="hero-subtitle">{{ getTranslation("hero.subtitle") }}</p>
+    <h1 class="hero-headline">{{ getTranslation("hero.headline") }}</h1>
+    <p class="hero-description">{{ getTranslation("hero.description") }}</p>
+
+    <div class="hero-social-proof">
+      <div class="ratings">
+        <span class="rating-text"
+          >{{ getTranslation("hero.ratings") }}: 5.0 <i class="fas fa-star"></i
+        ></span>
+        <p class="trusted-text">{{ getTranslation("hero.trustedBy") }}</p>
+      </div>
+      <div class="customer-avatars">
+        @for (avatarUrl of customerAvatars; track avatarUrl) {
+        <div class="avatar">
+          <img [src]="avatarUrl" alt="Customer" />
+        </div>
+        }
+        <div class="avatar-more">{{ getTranslation("hero.customers") }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="featured-products">
+  <div class="container">
+    <h2 class="section-title">{{ getTranslation("home.featuredProducts") }}</h2>
+    <div class="product-grid">
+      @for (product of featuredProducts; track product.id) {
+      <div class="product-card" [routerLink]="['/product', product.id]">
+        @if (product.images && product.images.length > 0) {
+        <div class="product-image">
+          <img [src]="product.images[0].url" [alt]="product.title" />
+        </div>
+        } @else {
+        <div class="product-image placeholder"></div>
+        }
+        <div class="product-info">
+          <h3 class="product-title">{{ product.title }}</h3>
+          <div class="product-price">
+            @if (product.onsale && product.salePrice < product.listPrice) {
+            <span class="sale-price"
+              >{{ product.salePrice | number : "1.2-2" }} ₺</span
+            >
+            <span class="original-price"
+              >{{ product.listPrice | number : "1.2-2" }} ₺</span
+            >
+            } @else {
+            <span class="regular-price"
+              >{{ product.listPrice | number : "1.2-2" }} ₺</span
+            >
+            }
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>

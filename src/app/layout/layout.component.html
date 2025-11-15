@@ -1,0 +1,153 @@
+@if (showBanner()) {
+<div class="top-banner">
+  <span class="banner-text">{{ getTranslation("banner.message") }}</span>
+  <button
+    class="banner-close"
+    (click)="closeBanner()"
+    aria-label="{{ getTranslation('banner.close') }}"
+  >
+    <i class="fas fa-times"></i>
+  </button>
+</div>
+}
+
+<header class="main-header">
+  <div class="header-container">
+    <a routerLink="/" class="logo">{{ getTranslation("common.brandName") }}</a>
+    <nav class="main-nav">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-link"
+      >
+        {{ getTranslation("nav.home") }}
+      </a>
+      <a routerLink="/about-us" routerLinkActive="active" class="nav-link">
+        {{ getTranslation("nav.aboutUs") }}
+      </a>
+      <a routerLink="/hair-colors" routerLinkActive="active" class="nav-link">
+        {{ getTranslation("nav.hairColors") }}
+      </a>
+      <a routerLink="/wigs" routerLinkActive="active" class="nav-link">
+        {{ getTranslation("nav.wigs") }}
+      </a>
+    </nav>
+    <div class="header-actions">
+      <div class="language-selector">
+        <button
+          class="icon-button language-button"
+          (click)="toggleLanguageDropdown()"
+          aria-label="{{ getTranslation('common.selectLanguage') }}"
+        >
+          <span class="language-code">{{
+            currentLanguage().substring(0, 2).toUpperCase()
+          }}</span>
+        </button>
+        @if (showLanguageDropdown()) {
+        <div class="language-dropdown">
+          <button
+            class="language-option"
+            (click)="setLanguage('english')"
+            [class.active]="currentLanguage() === 'english'"
+          >
+            {{ getTranslation("common.languages.english") }}
+          </button>
+          <button
+            class="language-option"
+            (click)="setLanguage('turkish')"
+            [class.active]="currentLanguage() === 'turkish'"
+          >
+            {{ getTranslation("common.languages.turkish") }}
+          </button>
+          <button
+            class="language-option"
+            (click)="setLanguage('russian')"
+            [class.active]="currentLanguage() === 'russian'"
+          >
+            {{ getTranslation("common.languages.russian") }}
+          </button>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main-content">
+  <router-outlet />
+</main>
+
+<footer class="main-footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>{{ getTranslation("common.brandName") }}</h3>
+      <p>{{ getTranslation("hero.description") }}</p>
+    </div>
+    <div class="footer-section">
+      <h4>{{ getTranslation("footer.quickLinks") }}</h4>
+      <ul>
+        <li>
+          <a routerLink="/">{{ getTranslation("nav.home") }}</a>
+        </li>
+        <li>
+          <a routerLink="/wigs">{{ getTranslation("nav.wigs") }}</a>
+        </li>
+        <li>
+          <a routerLink="/hair-colors">{{
+            getTranslation("nav.hairColors")
+          }}</a>
+        </li>
+        <li>
+          <a routerLink="/about-us">{{ getTranslation("nav.aboutUs") }}</a>
+        </li>
+        <li>
+          <a routerLink="/services-pricing">{{
+            getTranslation("nav.servicesPricing")
+          }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>{{ getTranslation("footer.contact") }}</h4>
+      <p>{{ getTranslation("footer.email") }}: info@atlasperuk.com</p>
+      <p>{{ getTranslation("footer.phone") }}: +90 212 123 4567</p>
+    </div>
+    <div class="footer-section">
+      <h4>{{ getTranslation("footer.location") }}</h4>
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.7499999999995!2d28.9744!3d41.0082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDAwJzI5LjUiTiAyOMKwNTgnMjcuOCJF!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+          width="100%"
+          height="200"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          [title]="getTranslation('footer.locationTitle')"
+        >
+        </iframe>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h4>{{ getTranslation("footer.followUs") }}</h4>
+      <div class="social-links">
+        <a href="#" [attr.aria-label]="getTranslation('footer.facebook')">{{
+          getTranslation("footer.facebook")
+        }}</a>
+        <a href="#" [attr.aria-label]="getTranslation('footer.instagram')">{{
+          getTranslation("footer.instagram")
+        }}</a>
+        <a href="#" [attr.aria-label]="getTranslation('footer.twitter')">{{
+          getTranslation("footer.twitter")
+        }}</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>
+      &copy; 2024 {{ getTranslation("common.brandName") }}.
+      {{ getTranslation("footer.copyright") }}
+    </p>
+  </div>
+</footer>

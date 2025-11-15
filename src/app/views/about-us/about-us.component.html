@@ -1,0 +1,68 @@
+<section class="about-hero">
+  <div class="container">
+    <h1 class="page-title">{{ getTranslation("about.title") }}</h1>
+    <p class="page-subtitle">{{ getTranslation("about.subtitle") }}</p>
+  </div>
+</section>
+
+<section class="about-content">
+  <div class="container">
+    <div class="about-section">
+      <h2>{{ getTranslation("about.whoWeAre.title") }}</h2>
+      <p>{{ getTranslation("about.whoWeAre.content") }}</p>
+    </div>
+
+    <div class="about-section">
+      <h2>{{ getTranslation("about.ourMission.title") }}</h2>
+      <p>{{ getTranslation("about.ourMission.content") }}</p>
+    </div>
+
+    <div class="about-section">
+      <h2>{{ getTranslation("about.ourValues.title") }}</h2>
+      <div class="values-grid">
+        <div class="value-item">
+          <h3>{{ getTranslation("about.ourValues.quality.title") }}</h3>
+          <p>{{ getTranslation("about.ourValues.quality.description") }}</p>
+        </div>
+        <div class="value-item">
+          <h3>{{ getTranslation("about.ourValues.innovation.title") }}</h3>
+          <p>{{ getTranslation("about.ourValues.innovation.description") }}</p>
+        </div>
+        <div class="value-item">
+          <h3>{{ getTranslation("about.ourValues.customerService.title") }}</h3>
+          <p>{{ getTranslation("about.ourValues.customerService.description") }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-section">
+      <h2>{{ getTranslation("about.ourStory.title") }}</h2>
+      <p>{{ getTranslation("about.ourStory.content") }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="location-section">
+  <div class="container">
+    <h2>{{ getTranslation("about.location.title") }}</h2>
+    <p class="location-description">{{ getTranslation("about.location.description") }}</p>
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.7499999999995!2d28.9744!3d41.0082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDAwJzI5LjUiTiAyOMKwNTgnMjcuOCJF!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+        width="100%"
+        height="450"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Atlas Peruk Location">
+      </iframe>
+    </div>
+    <div class="location-info">
+      <p><strong>{{ getTranslation("about.location.address") }}:</strong> İstanbul, Turkey</p>
+      <p><strong>{{ getTranslation("about.location.phone") }}:</strong> +90 212 123 4567</p>
+      <p><strong>{{ getTranslation("about.location.email") }}:</strong> info@atlasperuk.com</p>
+    </div>
+  </div>
+</section>
+
