@@ -4,19 +4,20 @@ import { LanguageService } from '../../services/language.service';
 import { SEOService } from '../../services/seo.service';
 
 @Component({
-  selector: 'app-hair-colors',
+  selector: 'app-real-training-hair',
   standalone: true,
   imports: [ProductListingComponent],
   template: `
     <app-product-listing
-      titleKey="hairColors.title"
-      subtitleKey="hairColors.subtitle"
-      searchPlaceholderKey="hairColors.searchPlaceholder"
-      noResultsKey="hairColors.noResults"
+      titleKey="realTrainingHair.title"
+      subtitleKey="realTrainingHair.subtitle"
+      searchPlaceholderKey="realTrainingHair.searchPlaceholder"
+      noResultsKey="realTrainingHair.noResults"
+      categoryName="Real Training Mannequin Hair"
     />
   `
 })
-export class HairColorsComponent implements OnInit {
+export class RealTrainingHairComponent implements OnInit {
   constructor(
     private languageService: LanguageService,
     private seoService: SEOService
@@ -28,9 +29,9 @@ export class HairColorsComponent implements OnInit {
 
   private setupSEO(): void {
     const brandName = this.languageService.getTranslation('common.brandName');
-    const title = this.languageService.getTranslation('hairColors.title');
-    const subtitle = this.languageService.getTranslation('hairColors.subtitle');
-    const url = '/hair-colors';
+    const title = this.languageService.getTranslation('realTrainingHair.title');
+    const subtitle = this.languageService.getTranslation('realTrainingHair.subtitle');
+    const url = '/real-training-hair';
 
     this.seoService.setHreflangTags([
       { lang: 'en', url },
@@ -40,8 +41,8 @@ export class HairColorsComponent implements OnInit {
 
     this.seoService.setSEOData({
       title: `${title} - ${brandName}`,
-      description: subtitle || `Explore our wide range of hair colors at ${brandName}. Find the perfect shade for your hair extensions and wigs.`,
-      keywords: 'hair colors, hair dye, hair extensions colors, wig colors, blonde hair, brunette hair, red hair, black hair',
+      description: subtitle || `Shop premium real training hair at ${brandName}. Professional quality real hair for training mannequins.`,
+      keywords: 'real training hair, human hair training, training mannequin hair, real practice hair',
       url,
       type: 'website',
       image: '/assets/images/logo.svg'

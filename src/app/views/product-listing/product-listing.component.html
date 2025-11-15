@@ -1,0 +1,123 @@
+<div class="product-listing-page">
+  <div class="page-header">
+    <h1>{{ getTranslation(titleKey) }}</h1>
+    <p>{{ getTranslation(subtitleKey) }}</p>
+  </div>
+
+  <div class="search-container">
+    <input
+      type="text"
+      class="search-input"
+      [placeholder]="getTranslation(searchPlaceholderKey)"
+      [(ngModel)]="searchQuery"
+      (input)="onSearchChange()"
+    />
+  </div>
+
+  @if (loading) {
+  <div class="loading">{{ getTranslation("common.loading") }}</div>
+  } @else {
+  <div class="products-container">
+    @if (products.length === 0 && searchQuery.trim()) {
+    <div class="no-results">
+      <p>{{ getTranslation(noResultsKey) }} "{{ searchQuery }}"</p>
+    </div>
+    } @else {
+    <div class="product-grid">
+      @for (product of paginatedProducts; track product.id) {
+      <div class="product-card" [routerLink]="['/product', product.id]">
+        @if (product.images && product.images.length > 0) {
+        <div class="product-image">
+          <img [src]="product.images[0].url" [alt]="product.title" />
+        </div>
+        } @else {
+        <div class="product-image placeholder"></div>
+        }
+        <div class="product-info">
+          <h3 class="product-title">{{ product.title }}</h3>
+          <div class="product-price">
+            @if (product.onsale && product.salePrice < product.listPrice) {
+            <span class="sale-price"
+              >{{ product.salePrice | number : "1.2-2" }} ₺</span
+            >
+            <span class="original-price"
+              >{{ product.listPrice | number : "1.2-2" }} ₺</span
+            >
+            } @else {
+            <span class="regular-price"
+              >{{ product.listPrice | number : "1.2-2" }} ₺</span
+            >
+            }
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    @if (totalPages > 1) {
+    <div class="pagination">
+      <button
+        class="pagination-arrow"
+        (click)="previousPage()"
+        [disabled]="currentPage === 1"
+        aria-label="Previous page"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10 12L6 8L10 4"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+
+      <div class="pagination-numbers">
+        @for (page of getVisiblePages(); track page) { @if (page === -1) {
+        <span class="pagination-ellipsis">...</span>
+        } @else {
+        <button
+          class="pagination-number"
+          [class.active]="currentPage === page"
+          (click)="goToPage(page)"
+          [attr.aria-label]="'Go to page ' + page"
+        >
+          {{ page }}
+        </button>
+        } }
+      </div>
+
+      <button
+        class="pagination-arrow"
+        (click)="nextPage()"
+        [disabled]="currentPage === totalPages"
+        aria-label="Next page"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 4L10 8L6 12"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+    } }
+  </div>
+  }
+</div>

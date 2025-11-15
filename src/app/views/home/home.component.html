@@ -14,7 +14,7 @@
       <div class="customer-avatars">
         @for (avatarUrl of customerAvatars; track avatarUrl) {
         <div class="avatar">
-          <img [src]="avatarUrl" alt="Customer" />
+          <img [src]="avatarUrl" [alt]="getTranslation('hero.customers') + ' - ' + getTranslation('common.brandName')" loading="lazy" />
         </div>
         }
         <div class="avatar-more">{{ getTranslation("hero.customers") }}</div>

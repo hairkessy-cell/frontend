@@ -4,19 +4,20 @@ import { LanguageService } from '../../services/language.service';
 import { SEOService } from '../../services/seo.service';
 
 @Component({
-  selector: 'app-hair-colors',
+  selector: 'app-african-afro-hair',
   standalone: true,
   imports: [ProductListingComponent],
   template: `
     <app-product-listing
-      titleKey="hairColors.title"
-      subtitleKey="hairColors.subtitle"
-      searchPlaceholderKey="hairColors.searchPlaceholder"
-      noResultsKey="hairColors.noResults"
+      titleKey="africanAfroHair.title"
+      subtitleKey="africanAfroHair.subtitle"
+      searchPlaceholderKey="africanAfroHair.searchPlaceholder"
+      noResultsKey="africanAfroHair.noResults"
+      categoryName="African Afro Hair"
     />
-  `
+  `,
 })
-export class HairColorsComponent implements OnInit {
+export class AfricanAfroHairComponent implements OnInit {
   constructor(
     private languageService: LanguageService,
     private seoService: SEOService
@@ -28,9 +29,9 @@ export class HairColorsComponent implements OnInit {
 
   private setupSEO(): void {
     const brandName = this.languageService.getTranslation('common.brandName');
-    const title = this.languageService.getTranslation('hairColors.title');
-    const subtitle = this.languageService.getTranslation('hairColors.subtitle');
-    const url = '/hair-colors';
+    const title = this.languageService.getTranslation('africanAfroHair.title');
+    const subtitle = this.languageService.getTranslation('africanAfroHair.subtitle');
+    const url = '/african-afro-hair';
 
     this.seoService.setHreflangTags([
       { lang: 'en', url },
@@ -40,12 +41,11 @@ export class HairColorsComponent implements OnInit {
 
     this.seoService.setSEOData({
       title: `${title} - ${brandName}`,
-      description: subtitle || `Explore our wide range of hair colors at ${brandName}. Find the perfect shade for your hair extensions and wigs.`,
-      keywords: 'hair colors, hair dye, hair extensions colors, wig colors, blonde hair, brunette hair, red hair, black hair',
+      description: subtitle || `Shop premium African afro hair products at ${brandName}. High-quality afro hair extensions for all styles.`,
+      keywords: 'african afro hair, afro hair extensions, curly hair, afro hair products, natural afro hair',
       url,
       type: 'website',
       image: '/assets/images/logo.svg'
     });
   }
 }
-

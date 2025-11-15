@@ -4,19 +4,20 @@ import { LanguageService } from '../../services/language.service';
 import { SEOService } from '../../services/seo.service';
 
 @Component({
-  selector: 'app-hair-colors',
+  selector: 'app-hair-accessories',
   standalone: true,
   imports: [ProductListingComponent],
   template: `
     <app-product-listing
-      titleKey="hairColors.title"
-      subtitleKey="hairColors.subtitle"
-      searchPlaceholderKey="hairColors.searchPlaceholder"
-      noResultsKey="hairColors.noResults"
+      titleKey="hairAccessories.title"
+      subtitleKey="hairAccessories.subtitle"
+      searchPlaceholderKey="hairAccessories.searchPlaceholder"
+      noResultsKey="hairAccessories.noResults"
+      categoryName="Hair Accessories"
     />
   `
 })
-export class HairColorsComponent implements OnInit {
+export class HairAccessoriesComponent implements OnInit {
   constructor(
     private languageService: LanguageService,
     private seoService: SEOService
@@ -28,9 +29,9 @@ export class HairColorsComponent implements OnInit {
 
   private setupSEO(): void {
     const brandName = this.languageService.getTranslation('common.brandName');
-    const title = this.languageService.getTranslation('hairColors.title');
-    const subtitle = this.languageService.getTranslation('hairColors.subtitle');
-    const url = '/hair-colors';
+    const title = this.languageService.getTranslation('hairAccessories.title');
+    const subtitle = this.languageService.getTranslation('hairAccessories.subtitle');
+    const url = '/hair-accessories';
 
     this.seoService.setHreflangTags([
       { lang: 'en', url },
@@ -40,8 +41,8 @@ export class HairColorsComponent implements OnInit {
 
     this.seoService.setSEOData({
       title: `${title} - ${brandName}`,
-      description: subtitle || `Explore our wide range of hair colors at ${brandName}. Find the perfect shade for your hair extensions and wigs.`,
-      keywords: 'hair colors, hair dye, hair extensions colors, wig colors, blonde hair, brunette hair, red hair, black hair',
+      description: subtitle || `Shop premium hair accessories at ${brandName}. Find the perfect accessories for your hair styling needs.`,
+      keywords: 'hair accessories, hair styling accessories, hair clips, hair bands, hair styling tools',
       url,
       type: 'website',
       image: '/assets/images/logo.svg'

@@ -1,0 +1,15 @@
+# robots.txt for hairkessy.com
+
+User-agent: *
+Allow: /
+
+# Disallow admin or internal routes if any
+# Disallow: /admin/
+# Disallow: /api/
+
+# Sitemap location
+Sitemap: https://hairkessy.com/sitemap.xml
+
+# Crawl-delay (optional, uncomment if needed)
+# Crawl-delay: 1
+
